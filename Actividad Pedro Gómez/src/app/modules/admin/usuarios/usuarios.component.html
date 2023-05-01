@@ -1,0 +1,126 @@
+<!-- Contenedor general -->
+<div class="general-container ">
+
+    <!-- Contenedor de donde se encuentra el buscador -->
+    <div class="search-container mb-5">
+        <div class="flex justify-between items-center search">
+
+            <!-- Campo de texto para introducir la búsqueda -->
+            <input type="text" [(ngModel)]="busqueda" placeholder="Introduce tu búsqueda"
+                class="border rounded-lg p-2 mr-2 flex-grow">
+
+            <!-- Lista desplegable para elegir el criterio de búsqueda -->
+            <select [(ngModel)]="campoBusqueda" class="border rounded-lg p-2 mr-2">
+                <option value="" selected>-- Criterio de búsqueda --</option>
+                <option value="nombreApellidos">Nombre y apellidos</option>
+                <option value="localidad">Localidad</option>cácere
+                <option value="email">Email</option>
+                <option value="provincia">Provincia</option>
+            </select>
+
+            <!-- Botón de búsqueda. Al pulsar sobre él se mostrarán todos los resultados que coincidan con la búsqueda realizada (CORREGIR: se descoloca al realizar la búsqueda.) -->
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8 ml-2"
+                (click)="buscar()">
+                Buscar
+            </button>
+        </div>
+
+        <!-- Línea divisoria -->
+        <hr class="mt-2">
+    </div>
+
+    <!-- Contenedor de tarjetas de usuario -->
+    <div class="cards-container">
+
+        <div class="flex flex-wrap gap-5 body">
+
+            <!-- Mensaje de error si no se encuentran resultados. Con un ngIf comprobamos si el array de usuarios tiene 0 registros, si es así muestra el mensaje. -->
+            <p class="sin-resultados center-message text-center font-bold italic text-3xl" *ngIf="usuarios.length == 0">
+                No se encontraron resultados</p>
+
+            <!-- Tarjetas de usuario. Recorremos con un ngFor el resultado de el getUsuarios que está almacenado en el array usuarios. -->
+            <ul class="mb-3 bg-blue-300 rounded-xl p-5 max-w-md" *ngFor="let usuario of usuarios">
+                <li>
+                    <span class="nombreDato">Email:</span> {{ usuario.email }}
+                </li>
+
+                <li>
+                    <span class="nombreDato">Nombre:</span> {{ usuario.nombreApellidos }}
+                </li>
+
+                <li>
+                    <span class="nombreDato">Localidad:</span> {{ usuario.localidad }}
+                </li>
+
+                <li class="mb mb-10">
+                    <span class="nombreDato">Provincia:</span> {{ usuario.provincia }}
+                </li>
+
+                <!-- Botón para eliminar usuario. Al pulsar sobre el se ejecuta el método deleteUsuario -->
+                <li class="flex items-center justify-center mt-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        (click)="deleteUsuario(usuario.id)">
+                        Eliminar usuario
+                    </button>
+                </li>
+
+                <!-- Botón para editar usuario. Al pulsar sobre el se ejecuta el método updateUsuario  -->
+                <li class="flex items-center justify-center mt-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        (click)="updateUsuario(usuario)">
+                        Editar usuario
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Ventana emergente para editar usuario -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center" *ngIf="usuarioSeleccionado">
+
+        <!-- Contenedor principal de la ventana emergente -->
+        <div class="bg-white rounded-lg p-5 max-w-md">
+
+            <!-- Título de la ventana emergente -->
+            <h2 class="text-xl font-bold mb-5">Editar usuario</h2>
+
+            <!-- Campo para editar el email -->
+            <div class="mb-3">
+                <label for="email" class="block font-bold mb-2">Email</label>
+                <input type="email" class="border-2 border-gray-400 p-2 w-full" name="email"
+                    [(ngModel)]="usuarioSeleccionado.email">
+            </div>
+
+            <!-- Formulario para editar los datos del usuario seleccionado -->
+
+            <!-- Campo para editar el nombre y apellidos -->
+            <div class="mb-3">
+                <label for="nombreApellidos" class="block font-bold mb-2">Nombre y apellidos</label>
+                <input type="text" class="border-2 border-gray-400 p-2 w-full" name="nombreApellidos"
+                    [(ngModel)]="usuarioSeleccionado.nombreApellidos">
+            </div>
+
+            <!-- Campo para editar la localidad -->
+            <div class="mb-5">
+                <label for="localidad" class="block font-bold mb-2">Localidad</label>
+                <input type="text" class="border-2 border-gray-400 p-2 w-full" name="localidad"
+                    [(ngModel)]="usuarioSeleccionado.localidad">
+            </div>
+
+            <!-- Campo para editar la provincia -->
+            <div class="mb-3">
+                <label for="provincia" class="block font-bold mb-2">Provincia</label>
+                <input type="text" class="border-2 border-gray-400 p-2 w-full" name="provincia"
+                    [(ngModel)]="usuarioSeleccionado.provincia">
+            </div>
+
+            <!-- Botones para guardar o cancelar los cambios -->
+            <div class="flex justify-end">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    (click)="confirmarCambios()">Guardar</button>
+                <button class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+                    (click)="usuarioSeleccionado = null">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

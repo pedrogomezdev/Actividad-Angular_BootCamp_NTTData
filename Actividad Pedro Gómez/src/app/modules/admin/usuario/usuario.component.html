@@ -1,0 +1,62 @@
+<!-- tailwind -->
+<!-- Contenedor principal que centra el formulario en la pantalla y establece un ancho máximo de  md para dispositivos medianos-->
+<div class="flex justify-center items-center h-screen mx-auto max-w-md">
+
+    <!-- Formulario de registro de usuario -->
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+        <!-- Campo de correo electrónico -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="email">
+                Correo electrónico
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="email" type="email" placeholder="Correo electrónico" [(ngModel)]="nuevoUsuario.email"
+                name="correoElectronico" />
+        </div>
+
+        <!-- Campo de nombre y apellidos -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="nameSurname">
+                Nombre y apellidos
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="nameSurname" type="text" placeholder="Nombre de usuario" [(ngModel)]="nuevoUsuario.nombreApellidos"
+                name="nameSurname" />
+        </div>
+
+        <!-- Campo de localidad -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="localidad">
+                Localidad
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="localidad" type="text" placeholder="Localidad" [(ngModel)]="nuevoUsuario.localidad"
+                name="localidad" />
+        </div>
+
+        <!-- Campo de provincia -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="provincia">
+                Provincia
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="provincia" type="text" placeholder="Provincia" [(ngModel)]="nuevoUsuario.provincia"
+                name="provincia" />
+        </div>
+
+        <!-- Botón de registro. Al pulsar sobre él se ejecutará el método postUsuario que dará de alta en el servidor un
+        usuario con los datos proporcionados (el id se autogenerará en el backend.)-->
+        <div class="flex items-center justify-center">
+            <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="button" (click)="postUsuario()">
+                Registrar
+            </button>
+        </div>
+    </form>
+</div>

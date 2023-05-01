@@ -1,0 +1,101 @@
+<div class="general-container">
+    <div class="search-container mb-5">
+        <div class="flex justify-between items-center search">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8 mr-5 mt-2"
+                (click)="mostrarFormCrearViajeFunc()">
+                Crear nuevo viaje
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8 ml-5 mt-2 ">
+                Buscar viaje
+            </button>
+        </div>
+
+        <!-- Línea divisoria -->
+        <hr class="mb-1">
+    </div>
+
+    <div class="card-container">
+
+        <div class="card" *ngFor="let viaje of viajes">
+            <div class="card-header flex justify-between">
+                <h2>{{viaje.titulo}}</h2>
+                <div class="delete-button-container">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8 ml-5">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>Organizador:</strong> {{viaje.organizador.nombreApellidos}}</p>
+                <p><strong>Descripción:</strong> {{viaje.descripcion}}</p>
+                <p><strong>Salida:</strong> {{viaje.salida}}</p>
+                <p><strong>Punto de salida:</strong> {{viaje.puntoSalida.name}} ({{viaje.puntoSalida.lat}},
+                    {{viaje.puntoSalida.lon}})</p>
+                <p><strong>Punto de llegada:</strong> {{viaje.puntoLlegada.name}} ({{viaje.puntoLlegada.lat}},
+                    {{viaje.puntoLlegada.lon}})</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Formulario para crear un nuevo viaje -->
+<div id="form-crear-viaje" class="form-crear-viaje" *ngIf="mostrarFormCrearViaje">
+    <h3 class="mb-2  text-center"><strong>Crear nuevo viaje</strong></h3>
+    <form>
+        <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" [(ngModel)]="tituloViaje" required>
+        </div>
+        <div class="form-group">
+            <label for="organizador">Organizador:</label>
+            <select id="organizador" name="organizador">
+                <option value="Usuario 1">Usuario 1</option>
+                <option value="Usuario 2">Usuario 2</option>
+                <option value="Usuario 3">Usuario 3</option>
+                <option value="Usuario 4">Usuario 4</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion"  required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha-salida">Fecha de salida:</label>
+            <input type="date" id="fecha-salida" name="fecha-salida" required>
+        </div>
+
+        <div class="form-group">
+            <label for="hora-salida">Hora de salida:</label>
+            <input type="time" id="hora-salida" name="hora-salida" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lugar-salida">Lugar de salida:</label>
+            <input type="text" id="lugar-salida" name="lugar-salida" required>
+        </div>
+
+        <div class="form-group">
+            <label for="latitud">Latitud:</label>
+            <input type="number" step="any" id="latitud" name="latitud">
+        </div>
+
+        <div class="form-group">
+            <label for="longitud">Longitud:</label>
+            <input type="number" step="any" id="longitud" name="longitud">
+        </div>
+
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8 ml-2" (click)="postUsuario()">
+            Crear viaje
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-8 ml-2" (click)="cancelarFormCrearViajeFunc()">
+            Cancelar
+        </button>
+    </form>
+
+
+</div>
