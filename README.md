@@ -4,7 +4,7 @@
 
 El objetivo de esta actividad es realizar un CRUD completo para acceder a una API de usuarios para poder realizar el alta de los mismos, la baja, la modificación y su visualización.
 
-Opcionalmente, se propone realizar lo mismo para los trayectos (que tendrán usuarios asociados y una estructura del JSON un poco más compleja). Esta parte aún estoy realizándola.
+Opcionalmente, se propone realizar lo mismo para los trayectos (que tendrán usuarios asociados y una estructura del JSON un poco más compleja). Esta parte aún no está realizada.
 
 La actividad debe ser realizada con Angular utilizando la plantilla "fuse-starter". 
 
